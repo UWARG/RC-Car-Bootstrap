@@ -12,6 +12,10 @@
 extern "C" {
 #endif
 
+// Includes
+#include "main.h"
+
+// Definitions
 #define NUM_CHANNELS 2
 #define MAX_PWM 1024
 #define MIN_PWM -1024

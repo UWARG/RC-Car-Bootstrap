@@ -3,6 +3,8 @@
  *
  * Created on August 24, 2014, 05:38 PM
  */
+#include <stdlib.h>
+#include <string.h>
 #include "StringUtils.h"
 #include "UART2.h"
 

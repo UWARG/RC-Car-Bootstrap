@@ -12,6 +12,11 @@
 extern "C" {
 #endif
 
+// Includes
+#include "main.h"
+    
+// Function Prototypes
+
 /*****************************************************************************
  * Function: char* concat(char* str1, char* str2)
  *

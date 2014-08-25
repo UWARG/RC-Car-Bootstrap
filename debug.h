@@ -11,6 +11,9 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+    
+// Includes
+#include "main.h"
 
 // Function Prototypes    
     

@@ -12,6 +12,9 @@
 extern "C" {
 #endif
 
+// Includes
+#include "main.h"
+//TODO: Finish these function prototype descriptions
 //Function Prototypes
 void initInputCapture(char initIC);
 void initIC(char initIC);

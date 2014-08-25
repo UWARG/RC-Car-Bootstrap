@@ -12,6 +12,10 @@
 extern "C" {
 #endif
 
+// Includes
+#include "main.h"
+
+// Definitions
 #define MSEC 470
 #define UPPER_PWM 941
 #define LOWER_PWM 470
