@@ -8,7 +8,7 @@
 #include "InterchipDMA.h"
 
 char newGPSDataAvailable = 0;
-GPSData gpsData __attribute__((space(dma)));
+GPSData GPS __attribute__((space(dma)));
 /*
  *
  */
@@ -25,7 +25,7 @@ void init_DMA0(){
     DMA0CONbits.DIR = 0; //Transfer from SPI to DSPRAM
     DMA0CONbits.MODE = 0b00; //Transfer continuously
     DMA0CONbits.SIZE = 1; //Transfer bytes (8 bits)
-    DMA0STA = __builtin_dmaoffset(&gpsData); //Primary Transfer Buffer
+    DMA0STA = __builtin_dmaoffset(&GPS); //Primary Transfer Buffer
     DMA0PAD = (volatile unsigned int) &SPI1BUF; //Peripheral Address
     DMA0CNT = sizeof(GPSData) - 1; //+1 for checksum //DMA Transfer Count Length
     DMA0REQ = 0b0001010; //IRQ code for SPI1

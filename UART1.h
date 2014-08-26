@@ -5,24 +5,18 @@
  * Created on June 15, 2013, 2:52 PM
  */
 
-#ifndef UART2_H
-#define	UART2_H
-
-#ifdef	__cplusplus
-extern "C" {
-#endif
-    
-// Includes
-#include "main.h"
+#ifndef UART_H
+#define	UART_H
+#endif	/* UART_H */
 
 //Function Prototypes
 
 /*****************************************************************************
- * Function: void InitUART2();
+ * Function: void initUART1();
  *
  * Preconditions: None.
  *
- * Overview: Initializes the UART2 interface. This function was designed for
+ * Overview: Initializes the UART1 interface. This function was designed for
  *  initialization of the interface for debugging usage.
  *
  *
@@ -31,12 +25,12 @@ extern "C" {
  * Output: None.
  *
  *****************************************************************************/
-void initUART2();
+void initUART1();
 
 /*****************************************************************************
- * Function: void UART2_SendString(char *s);
+ * Function: void UART1_SendString(char *s);
  *
- * Preconditions: UART2 must have been initialized.
+ * Preconditions: UART1 must have been initialized.
  *
  * Overview: Sends a string of characters specified by an array of char values.
  *  Note the char array does not need to represent characters, it can be any
@@ -48,14 +42,14 @@ void initUART2();
  * Output: None.
  *
  *****************************************************************************/
-void UART2_SendString(char *s);
+void UART1_SendChar(char data);
 
 /*****************************************************************************
- * Function: void UART2_SendChar(char data);
+ * Function: void UART1_SendChar(char data);
  *
- * Preconditions: UART2 must have been initialized.
+ * Preconditions: UART1 must have been initialized.
  *
- * Overview: Sends a single character (or byte of data) through the UART2 port.
+ * Overview: Sends a single character (or byte of data) through the UART1 port.
  *
  *
  * Input: char data -> byte of data to be transmitted.
@@ -63,10 +57,4 @@ void UART2_SendString(char *s);
  * Output: None.
  *
  *****************************************************************************/
-void UART2_SendChar(char data);
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* UART2_H */
+void UART1_SendString(char *s);

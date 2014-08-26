@@ -7,10 +7,17 @@
       <logicalFolder name="f2" displayName="Debugging" projectFiles="true">
         <itemPath>UART2.h</itemPath>
         <itemPath>debug.h</itemPath>
+        <itemPath>UART1.h</itemPath>
+        <itemPath>StartupErrorCodes.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="GPS" projectFiles="true">
         <itemPath>InterchipDMA.h</itemPath>
-        <itemPath>SPI.h</itemPath>
+        <itemPath>SPI1.h</itemPath>
+        <itemPath>GPS.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f5" displayName="Network" projectFiles="true">
+        <itemPath>net.h</itemPath>
+        <itemPath>commands.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="PWM Management" projectFiles="true">
         <itemPath>InputCapture.h</itemPath>
@@ -20,6 +27,8 @@
       <logicalFolder name="f3" displayName="Utilities" projectFiles="true">
         <itemPath>StringUtils.h</itemPath>
       </logicalFolder>
+      <itemPath>main.h</itemPath>
+      <itemPath>HunterTruckAPI.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -31,10 +40,18 @@
       <logicalFolder name="f2" displayName="Debugging" projectFiles="true">
         <itemPath>UART2.c</itemPath>
         <itemPath>debug.c</itemPath>
+        <itemPath>UART1.c</itemPath>
+        <itemPath>StartupErrorCodes.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="GPS" projectFiles="true">
         <itemPath>InterchipDMA.c</itemPath>
-        <itemPath>SPI.c</itemPath>
+        <itemPath>GPS.c</itemPath>
+        <itemPath>SPI1.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f5" displayName="Network" projectFiles="true">
+        <itemPath>net_inbound.c</itemPath>
+        <itemPath>net_common.c</itemPath>
+        <itemPath>net_outbound.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="PWM Management" projectFiles="true">
         <itemPath>InputCapture.c</itemPath>
@@ -45,6 +62,7 @@
         <itemPath>StringUtils.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
+      <itemPath>HunterTruckAPI.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -85,6 +103,42 @@
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
       <C30>
+        <property key="code-model" value="default"/>
+        <property key="const-model" value="default"/>
+        <property key="data-model" value="large-data"/>
+        <property key="enable-all-warnings" value="true"/>
+        <property key="enable-ansi-std" value="false"/>
+        <property key="enable-ansi-warnings" value="false"/>
+        <property key="enable-fatal-warnings" value="false"/>
+        <property key="enable-large-arrays" value="false"/>
+        <property key="enable-omit-frame-pointer" value="false"/>
+        <property key="enable-procedural-abstraction" value="false"/>
+        <property key="enable-short-double" value="false"/>
+        <property key="enable-symbols" value="true"/>
+        <property key="enable-unroll-loops" value="false"/>
+        <property key="extra-include-directories" value=""/>
+        <property key="isolate-each-function" value="false"/>
+        <property key="keep-inline" value="false"/>
+        <property key="oXC16gcc-align-arr" value="false"/>
+        <property key="oXC16gcc-cnsts-mauxflash" value="false"/>
+        <property key="oXC16gcc-data-sects" value="false"/>
+        <property key="oXC16gcc-errata" value=""/>
+        <property key="oXC16gcc-fillupper" value=""/>
+        <property key="oXC16gcc-large-aggregate" value="false"/>
+        <property key="oXC16gcc-mauxflash" value="false"/>
+        <property key="oXC16gcc-mpa-lvl" value=""/>
+        <property key="oXC16gcc-name-text-sec" value=""/>
+        <property key="oXC16gcc-near-chars" value="false"/>
+        <property key="oXC16gcc-no-isr-warn" value="false"/>
+        <property key="oXC16gcc-sfr-warn" value="false"/>
+        <property key="oXC16gcc-smar-io-lvl" value="1"/>
+        <property key="oXC16gcc-smart-io-fmt" value=""/>
+        <property key="optimization-level" value="0"/>
+        <property key="post-instruction-scheduling" value="default"/>
+        <property key="pre-instruction-scheduling" value="default"/>
+        <property key="preprocessor-macros" value=""/>
+        <property key="scalar-model" value="default"/>
+        <property key="use-cci" value="false"/>
       </C30>
       <C30-AS>
         <property key="assembler-symbols" value=""/>

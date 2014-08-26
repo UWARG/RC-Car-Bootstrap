@@ -9,7 +9,7 @@
 #include "SPI1.h"
 #include "GPS.h"
 
-extern GPSData gpsData;
+extern GPSData GPS;
 
 long double relativeLatitude = 0;
 long double relativeLongitude = 0;
@@ -20,14 +20,14 @@ void initGPS(){
     init_DMA0();
 }
 
-//TODO: Functions to checek GPS status isGPSLocked, getPosition, getXYPosition, getHeading, getSpeed, etc
-
 void getXYCoordinates(long double longitude, long double latitude, float* xyCoordinates){
+    //NOT INCLUDED IN FINAL PROJECT
     xyCoordinates[0] = getDistance(relativeLatitude, relativeLongitude, relativeLatitude, longitude);//Longitude relative to (0,0)
     xyCoordinates[1] = getDistance(relativeLatitude, relativeLongitude, latitude, relativeLongitude);
 }
 
 float getDistance(long double lat1, long double lon1, long double lat2, long double lon2){ //in meters
+    ///NOT INCLUDED IN FINAL PROJECT
     long double dLat = deg2rad(lat2 - lat1);
     long double dLon = deg2rad(lon2 - lon1);
 
@@ -39,4 +39,53 @@ float getDistance(long double lat1, long double lon1, long double lat2, long dou
     else {
          return EARTH_RADIUS * (2 * atan2(sqrt(a),sqrt(1 - a))) * -1000;
     }
+}
+
+void setRelativeAnchor(long double longitude, long double latitude){
+    //NOT INCLUDED IN FINAL PROJECT
+    relativeLatitude = latitude;
+    relativeLongitude = longitude;
+}
+
+int getLatitude(){
+    return GPS.latitude;
+}
+
+int getLongitude(){
+    return GPS.longitude;
+}
+
+int getHeading(){
+    return GPS.heading;
+}
+float getSpeed(){
+    return GPS.speed;
+}
+int getAltitude(){
+    return GPS.altitude;
+}
+void getPosition(long double* position){
+    position[0] = GPS.longitude;
+    position[1] = GPS.latitude;
+}
+void getXYPosition(float* position){
+    getXYCoordinates(GPS.longitude, GPS.latitude, position);
+}
+char isGPSLocked(){
+    return GPS.positionFix;
+}
+char getSatellites(){
+    return GPS.satellites;
+}
+float getUTCTime(){
+    return GPS.time;
+}
+char getHour(){
+    return (char)((int)(GPS.time/10000) % 100);
+}
+char getMin(){
+    return (char)((int)(GPS.time/100) % 100);
+}
+char getSec(){
+    return (char)((int)GPS.time % 100);
 }

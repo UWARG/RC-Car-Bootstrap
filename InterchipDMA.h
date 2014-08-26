@@ -27,6 +27,8 @@ typedef struct _GPSData {
     char positionFix;
 } GPSData;
 
+extern GPSData GPS;
+
 // Function Prototypes
 
 /*****************************************************************************

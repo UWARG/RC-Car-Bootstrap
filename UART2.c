@@ -1,8 +1,12 @@
-
+/*
+ * File:   UART2.c
+ *
+ * Created on August 26, 2014, 12:27 PM
+ */
 #include <p33FJ256GP710A.h>
 #include "UART2.h"
 
-void InitUART2()
+void initUART2()
 {
 	// This is an EXAMPLE, so brutal typing goes into explaining all bit sets
 
