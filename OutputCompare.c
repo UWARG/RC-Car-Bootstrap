@@ -4,9 +4,6 @@
  * Created on February 9, 2010, 10:53 AM
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <p33Fxxxx.h>
 #include "OutputCompare.h"
 #include "InputCapture.h"
 

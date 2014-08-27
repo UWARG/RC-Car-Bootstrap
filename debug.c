@@ -9,15 +9,15 @@
 #include "UART1.h"
 
 void error(char* message){
-    char* errorMessage = concat(concat("[error]", message),"/n");
-    UART1_SendString(errorMessage);
-    free(errorMessage);
+    //char* errorMessage = concat(concat("[error]", message),"/n");
+    UART1_SendString(message);
+    //free(errorMessage);
 }
 
 void warning(char* message){
-    char* warningMessage = concat(concat("[warning]", message),"/n");
-    UART1_SendString(warningMessage);
-    free(warningMessage);
+    //char* warningMessage = concat(concat("[warning]", message),"/n");
+    UART1_SendString(message);
+    //free(warningMessage);
 }
 
 void debug(char* message){

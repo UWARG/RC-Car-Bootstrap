@@ -15,16 +15,19 @@
 #include "HunterTruckAPI.h"
 #include "StartupErrorCodes.h"
 
+#include "OutputCompare.h"
+
 int lastCommandSentCode = 0;
 float time = 0;
 float lastTime = 0;
 
 void initTruck(){
-    initGPS();
+//    initGPS();
     initUART1();
-    initUART2();
-    initPWM(2,2);
-    initDataLink();
+//    initUART2();
+    initPWM(0b0,0b11);
+//    initOC(0b11);
+//    initDataLink();
     checkErrorCodes();
 }
 

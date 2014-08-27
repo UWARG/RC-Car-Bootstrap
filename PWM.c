@@ -21,22 +21,22 @@ void initPWM(char inputChannels, char outputChannels){
     int i = 0;
     for (i = 0; i < NUM_CHANNELS; i++){
         // Use default scale factor values
-        scaleFactorIn[i] = MAX_PWM/(UPPER_PWM - MIDDLE_PWM); // We know that MAX_PWM = (UPPER_PWM - MIDDLE_PWM)/2 for a factor of 1.
+        scaleFactorIn[i] = MAX_PWM/(float)(UPPER_PWM - MIDDLE_PWM); // We know that MAX_PWM = (UPPER_PWM - MIDDLE_PWM)/2 for a factor of 1.
         // Use default offset values
-        offsetIn[i] = 0;
+        offsetIn[i] = 1024;
         // Use default scale factor values
-        scaleFactorOut[i] = (UPPER_PWM - MIDDLE_PWM)/MAX_PWM; // We know that MAX_PWM = (UPPER_PWM - MIDDLE_PWM) for a factor of 1.
+        scaleFactorOut[i] = (float)(UPPER_PWM - MIDDLE_PWM)/MAX_PWM; // We know that MAX_PWM = (UPPER_PWM - MIDDLE_PWM) for a factor of 1.
         // Use default offset values
-        offsetOut[i] = 0;
+        offsetOut[i] = 1024;
     }
     initOC(outputChannels);
     initialized = 1;
 }
 
 void PWMInputCalibration(unsigned int channel, float signalScaleFactor, unsigned int signalOffset){
-    if (channel > 0 && channel < NUM_CHANNELS){ //Check if channel number is valid
-        scaleFactorIn[channel] = signalScaleFactor;
-        offsetIn[channel] = signalOffset;
+    if (channel > 0 && channel <= NUM_CHANNELS){ //Check if channel number is valid
+        scaleFactorIn[channel - 1] = signalScaleFactor;
+        offsetIn[channel - 1] = signalOffset;
     }
     else { //Invalid Channel
         //Display Error Message
@@ -45,9 +45,9 @@ void PWMInputCalibration(unsigned int channel, float signalScaleFactor, unsigned
 }
 
 void PWMOutputCalibration(unsigned int channel, float signalScaleFactor, unsigned int signalOffset){
-    if (channel > 0 && channel < NUM_CHANNELS){ //Check if channel number is valid
-        scaleFactorOut[channel] = signalScaleFactor;
-        offsetOut[channel] = signalOffset;
+    if (channel > 0 && channel <= NUM_CHANNELS){ //Check if channel number is valid
+        scaleFactorOut[channel - 1] = signalScaleFactor;
+        offsetOut[channel - 1] = signalOffset;
     }
     else { //Invalid Channel
         //Display Error Message
@@ -57,8 +57,8 @@ void PWMOutputCalibration(unsigned int channel, float signalScaleFactor, unsigne
 
 
 int getPWM(unsigned int channel){
-    if (initialized && channel > 0 && channel < NUM_CHANNELS){ //Is the Input Initialized?
-        return (getICValue(channel) - offsetIn[channel]) * scaleFactorIn[channel];
+    if (initialized && channel > 0 && channel <= NUM_CHANNELS){ //Is the Input Initialized?
+        return (getICValue(channel) - offsetIn[channel - 1]) * scaleFactorIn[channel - 1];
     }
     else { //Not initialized or invalid channel
         //Display Error Message
@@ -72,7 +72,7 @@ int* getPWMArray(){
         unsigned int* icArray = getICValues();
         int i = 0;
         for (i = 0; i < NUM_CHANNELS; i++){
-            pwmArray[i] = ((int)icArray[i] - offsetIn[i]) * scaleFactorIn[i];
+            pwmArray[i] = (int)((int)icArray[i] - offsetIn[i]) * scaleFactorIn[i];
         }
         return pwmArray;
     }
@@ -85,8 +85,8 @@ int* getPWMArray(){
 }
 
 void setPWM(unsigned int channel, int pwm){
-    if (initialized && channel > 0 && channel < NUM_CHANNELS){ //Is the Input Initialized?
-        setOCValue(channel, (int)((pwm + offsetIn[channel]) * scaleFactorIn[channel]));
+    if (initialized && channel > 0 && channel <= NUM_CHANNELS){ //Is the Input Initialized?
+        setOCValue(channel, (int)((pwm + offsetIn[channel - 1]) * scaleFactorIn[channel - 1]));
     }
     else { //Not initialized or invalid channel
         //Display Error Message
