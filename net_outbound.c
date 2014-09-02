@@ -35,9 +35,12 @@ struct telem_block *getDebugTelemetryBlock(void) {
         debugTelemetry->heading = (float) 1;
         debugTelemetry->groundSpeed = (float) 1;
         debugTelemetry->lastCommandSent = (int) 1;
-        debugTelemetry->errorCodes = (int)1;
-        debugTelemetry->waypointIndex = (char)1;
+        debugTelemetry->errorCodes = (unsigned int)1;
         debugTelemetry->gpsStatus = (char)1;
+        debugTelemetry->steeringSetpoint = (char)1;
+        debugTelemetry->throttleSetpoint = (char)1;
+        debugTelemetry->steeringOutput = (char)1;
+        debugTelemetry->throttleOutput = (char)1;
     }
     return debugTelemetry;
 }

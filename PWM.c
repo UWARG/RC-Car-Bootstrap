@@ -23,11 +23,11 @@ void initPWM(char inputChannels, char outputChannels){
         // Use default scale factor values
         scaleFactorIn[i] = MAX_PWM/(float)(UPPER_PWM - MIDDLE_PWM); // We know that MAX_PWM = (UPPER_PWM - MIDDLE_PWM)/2 for a factor of 1.
         // Use default offset values
-        offsetIn[i] = 1024;
+        offsetIn[i] = MIDDLE_PWM;
         // Use default scale factor values
         scaleFactorOut[i] = (float)(UPPER_PWM - MIDDLE_PWM)/MAX_PWM; // We know that MAX_PWM = (UPPER_PWM - MIDDLE_PWM) for a factor of 1.
         // Use default offset values
-        offsetOut[i] = 1024;
+        offsetOut[i] = MIDDLE_PWM;
     }
     initOC(outputChannels);
     initialized = 1;
@@ -86,7 +86,7 @@ int* getPWMArray(){
 
 void setPWM(unsigned int channel, int pwm){
     if (initialized && channel > 0 && channel <= NUM_CHANNELS){ //Is the Input Initialized?
-        setOCValue(channel, (int)((pwm + offsetIn[channel - 1]) * scaleFactorIn[channel - 1]));
+        setOCValue(channel, (int)(pwm * scaleFactorOut[channel - 1] + offsetOut[channel - 1]));
     }
     else { //Not initialized or invalid channel
         //Display Error Message
@@ -97,7 +97,7 @@ void setPWMArray(int* ocArray){
     if (initialized){ //Is the Input Initialized?
         int i = 0;
         for (i = 0; i < NUM_CHANNELS; i++){
-            setOCValue(i,(int)((ocArray[i] + offsetIn[i]) * scaleFactorIn[i]));
+            setOCValue(i,(int)(ocArray[i]  * scaleFactorOut[i] + offsetOut[i]));
         }
     }
     else { //Not initialized

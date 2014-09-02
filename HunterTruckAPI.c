@@ -5,7 +5,6 @@
  * Created on August 24, 2014, 9:08 PM
  */
 
-#include "PWM.h"
 #include "debug.h"
 #include "GPS.h"
 #include "UART1.h"
@@ -15,31 +14,54 @@
 #include "HunterTruckAPI.h"
 #include "StartupErrorCodes.h"
 
-#include "OutputCompare.h"
-
 int lastCommandSentCode = 0;
 float time = 0;
 float lastTime = 0;
+char sData = 0;
+char tData = 0;
 
 void initTruck(){
-//    initGPS();
+    //Setup Debugging Connection
     initUART1();
-//    initUART2();
-    initPWM(0b0,0b11);
-//    initOC(0b11);
-//    initDataLink();
+
+    //Check for any errors
     checkErrorCodes();
+
+    //Setup GPS
+    initGPS();
+
+    //Setup Input and Output
+    initPWM(0b11,0b11);
+    PWMOutputCalibration(1,HUNTER_TRUCK_STEERING_SCALE_FACTOR, HUNTER_TRUCK_STEERING_OFFSET);
+    PWMOutputCalibration(2,HUNTER_TRUCK_THROTTLE_SCALE_FACTOR, HUNTER_TRUCK_THROTTLE_OFFSET);
+
+    setThrottle(0);
+    setSteering(0);
+
+    //Setup Datalink
+    initDataLink();
 }
 
 void setSteering(int percent){
     //This is channel 1
+    //Limit the range between -100% and 100%
+    if (percent > 100)
+        percent = 100;
+    if (percent < -100)
+        percent = -100;
+    sData = percent; //Records the steering history
     setPWM(1,(int)(percent * 10.24));//Range: Percentage (-100/100) converted to -1024 to 1024
 }
 
 void setThrottle(int percent){
     //This is channel 2
-    percent -= 50;
-    setPWM(2,(int)(percent * 10.24/2));//Range: Percentage (0-100) converted to -1024 to 1024
+    //Limit the range between 0% and 100%
+    if (percent > 100)
+        percent = 100;
+    if (percent < -100)
+        percent = -100;
+    tData = percent; //Records the throttle history
+    setPWM(2,(int)(percent * 10.24));//Range: Percentage (0/100) converted to -1024 to 1024
 }
 
 void background(){
@@ -63,6 +85,7 @@ void readDatalink(void){
             case DEBUG_TEST:             // Debugging command, writes to debug UART
                 debug((char*) cmd->data);
                 break;
+            //TODO: Add commands here
             default:
                 break;
         }
@@ -74,25 +97,26 @@ int writeDatalink(long frequency){
 
     if (time - lastTime > frequency) {
         lastTime = time;
-    }
-    else if (time < lastTime){
-        lastTime = time;
-    }
 
-        struct telem_block* statusData = createTelemetryBlock();
+        struct telem_block* statusData = getDebugTelemetryBlock();//createTelemetryBlock();
 
+        if (statusData == 0){
+            return 0;
+        }
+        
         statusData->lat = getLatitude();
         statusData->lon = getLongitude();
         statusData->millis = getUTCTime();
-        statusData->heading = getHeading();
         statusData->groundSpeed = getSpeed();
-//        statusData->headingSetpoint = sp_Heading;
-//        statusData->throttleSetpoint = (int) ((float) (sp_ThrottleRate - 454) / (890 - 454)*100);
-//        statusData->headingOutput = sp_Heading;
-//        statusData->throttleOutput = (int) ((float) (sp_ThrottleRate - 454) / (890 - 454)*100);
+        statusData->heading = getHeading();
         statusData->lastCommandSent = lastCommandSentCode;
-        statusData->errorCodes = getErrorCodes();
-        statusData->gpsStatus = getSatellites() + (isGPSLocked() << 4);
+        //If I uncomment any one of these 3 lines I get opcode resets. Why???
+//        statusData->errorCodes = getErrorCodes();
+//        statusData->gpsStatus = (char)(getSatellites() + (isGPSLocked() << 4));
+//        statusData->steeringSetpoint = getPWM(1);
+//        statusData->throttleSetpoint = getPWM(2);
+//        statusData->steeringOutput = sData;
+//        statusData->throttleOutput = tData;
 
 
         if (BLOCKING_MODE) {
@@ -102,3 +126,9 @@ int writeDatalink(long frequency){
             return pushOutboundTelemetryQueue(statusData);
         }
     }
+    else if (time < lastTime){
+        lastTime = time;
+        return 0;
+    }
+    return 0;
+}

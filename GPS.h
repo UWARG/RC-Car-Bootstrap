@@ -96,7 +96,7 @@ void setRelativeAnchor(long double longitude, long double latitude);
  * Output: iint -> The latitude value (in degrees).
  *
  *****************************************************************************/
-int getLatitude();
+long double getLatitude();
 
 /*****************************************************************************
  * Function: int getLongitude();
@@ -107,10 +107,10 @@ int getLatitude();
  *
  * Input: None.
  *
- * Output: int -> The longitude value (in degrees)
+ * Output: long double -> The longitude value (in degrees)
  *
  *****************************************************************************/
-int getLongitude();
+long double getLongitude();
 
 /*****************************************************************************
  * Function: int getHeading();
@@ -121,7 +121,7 @@ int getLongitude();
  *
  * Input: None.
  *
- * Output: int -> The heading in degrees.
+ * Output: long double -> The heading in degrees.
  *
  *****************************************************************************/
 int getHeading();

@@ -47,11 +47,11 @@ void setRelativeAnchor(long double longitude, long double latitude){
     relativeLongitude = longitude;
 }
 
-int getLatitude(){
+long double getLatitude(){
     return GPS.latitude;
 }
 
-int getLongitude(){
+long double getLongitude(){
     return GPS.longitude;
 }
 

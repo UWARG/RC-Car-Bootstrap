@@ -43,9 +43,13 @@ struct telem_block {
     float groundSpeed;
     int heading;
     int lastCommandSent;
-    int errorCodes;
-    char waypointIndex;
+    unsigned int errorCodes;
     char gpsStatus;                              // 1Byte
+    char steeringSetpoint;
+    char throttleSetpoint;
+    char steeringOutput;
+    char throttleOutput;
+
     // TODO: Add additional telemetry to be sent here
 };
 

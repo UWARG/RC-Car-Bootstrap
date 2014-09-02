@@ -12,6 +12,19 @@
 extern "C" {
 #endif
 
+//Includes
+#include "OutputCompare.h"
+#include "PWM.h"
+
+//Definitions
+#define HUNTER_TRUCK_STEERING_SCALE_FACTOR ((float)(UPPER_PWM - MIDDLE_PWM)/MAX_PWM * 0.8)
+#define HUNTER_TRUCK_STEERING_OFFSET MIDDLE_PWM
+#define HUNTER_TRUCK_THROTTLE_SCALE_FACTOR ((float)(UPPER_PWM - MIDDLE_PWM)/MAX_PWM * 0.8)
+#define HUNTER_TRUCK_THROTTLE_OFFSET MIDDLE_PWM + 0//72//18
+
+
+//Function Prototypes
+
 /*****************************************************************************
  * Function: void initTruck();
  *

@@ -16,7 +16,6 @@ GPSData GPS __attribute__((space(dma)));
 void __attribute__((__interrupt__, no_auto_psv)) _DMA0Interrupt(void){
     newGPSDataAvailable = 1;
     IFS0bits.DMA0IF = 0;// Clear the DMA0 Interrupt Flag
-    debug("DMA");
 }
 void init_DMA0(){
     IFS0bits.DMA0IF = 0;
