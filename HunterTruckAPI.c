@@ -68,7 +68,8 @@ void background(){
     readDatalink();
     time = getUTCTime();
     writeDatalink(DATALINK_SEND_FREQUENCY);
-    
+    outboundBufferMaintenance();
+    inboundBufferMaintenance();
 }
 
 void readDatalink(void){
@@ -110,13 +111,12 @@ int writeDatalink(long frequency){
         statusData->groundSpeed = getSpeed();
         statusData->heading = getHeading();
         statusData->lastCommandSent = lastCommandSentCode;
-        //If I uncomment any one of these 3 lines I get opcode resets. Why???
-//        statusData->errorCodes = getErrorCodes();
-//        statusData->gpsStatus = (char)(getSatellites() + (isGPSLocked() << 4));
-//        statusData->steeringSetpoint = getPWM(1);
-//        statusData->throttleSetpoint = getPWM(2);
-//        statusData->steeringOutput = sData;
-//        statusData->throttleOutput = tData;
+        statusData->errorCodes = getErrorCodes();
+        statusData->gpsStatus = (char)(getSatellites() + (isGPSLocked() << 4));
+        statusData->steeringSetpoint = getPWM(1);
+        statusData->throttleSetpoint = getPWM(2);
+        statusData->steeringOutput = sData;
+        statusData->throttleOutput = tData;
 
 
         if (BLOCKING_MODE) {

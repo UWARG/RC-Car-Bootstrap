@@ -14,6 +14,7 @@
 
 #include "OutputCompare.h"
 #include "InterchipDMA.h"
+#include "PWM.h"
 
 _FOSCSEL(FNOSC_FRC); // Internal FRC oscillator
 _FOSC(FCKSM_CSECMD & OSCIOFNC_OFF & POSCMD_NONE);
