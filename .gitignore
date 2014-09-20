@@ -1,36 +1,31 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+build/
+dist/
+*.d
+private/
+*.properties
 
-# Folder config file
-Desktop.ini
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
 
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must ends with two \r.
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
