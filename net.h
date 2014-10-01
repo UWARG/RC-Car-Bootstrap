@@ -41,8 +41,10 @@ struct telem_block {
     long double lat, lon; // Latitude and longitude from gps    // 8Byte
     float millis;        // Timestamp UTC  // 4Byte
     float groundSpeed;
+    float debugFloat;
     int heading;
     int lastCommandSent;
+    int debugInt;
     unsigned int errorCodes;
     char gpsStatus;                              // 1Byte
     char steeringSetpoint;
@@ -50,6 +52,7 @@ struct telem_block {
     char steeringOutput;
     char throttleOutput;
 
+    char debugChar;
     // TODO: Add additional telemetry to be sent here
 };
 

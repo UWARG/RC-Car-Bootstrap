@@ -112,7 +112,49 @@ void readDatalink(void);
  * Output: None.
  *
  ****************************************************************************/
-int writeDatalink(long frequency);
+int writeDatalink(float frequency);
+
+/*****************************************************************************
+ * Function: void setDebugChar(char dChar);
+ *
+ * Preconditions: None
+ *
+ * Overview: Set a char to send back next time around
+ *
+ * Input: char dChar -> The the debug char to send back
+ *
+ * Output: None.
+ *
+ ****************************************************************************/
+void setDebugChar(char dChar);
+
+/*****************************************************************************
+ * Function: void setDebugInt(int dInt);
+ *
+ * Preconditions: None
+ *
+ * Overview: Set a int to send back next time around
+ *
+ * Input: int dInt -> The the debug int to send back
+ *
+ * Output: None.
+ *
+ ****************************************************************************/
+void setDebugInt(int dInt);
+
+/*****************************************************************************
+ * Function: void setDebugFloat(float dFloat);
+ *
+ * Preconditions: None
+ *
+ * Overview: Set a float to send back next time around
+ *
+ * Input: float dFloat -> The the debug float to send back
+ *
+ * Output: None.
+ *
+ ****************************************************************************/
+void setDebugFloat(float dFloat);
 
 #ifdef	__cplusplus
 }

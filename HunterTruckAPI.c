@@ -20,6 +20,36 @@ float lastTime = 0;
 char sData = 0;
 char tData = 0;
 
+char debugChar;
+int debugInt;
+float debugFloat;
+
+void setDebugChar(char dChar) {
+    debugChar = dChar;
+}
+
+void setDebugInt(int dInt) {
+    debugInt = dInt;
+}
+
+void setDebugFloat(float dFloat) {
+    debugFloat = dFloat;
+}
+
+static void blockForGpsStabilization() {
+    float consecutiveSeconds = 0;
+    int lastTime = getSec();
+
+    while (consecutiveSeconds < 5) {
+        int thisTime = getSec();
+        int timeDelta = thisTime - lastTime;
+        consecutiveSeconds += timeDelta;
+        if (lastTime > thisTime || timeDelta > 1 ) {
+            consecutiveSeconds = 0;
+        }
+    }
+}
+
 void initTruck(){
     //Setup Debugging Connection
     initUART1();
@@ -40,6 +70,9 @@ void initTruck(){
 
     //Setup Datalink
     initDataLink();
+
+    // Wait for gps time to stabilize
+    blockForGpsStabilization();
 }
 
 void setSteering(int percent){
@@ -94,7 +127,7 @@ void readDatalink(void){
     }
 
 }
-int writeDatalink(long frequency){
+int writeDatalink(float frequency){
 
     if (time - lastTime > frequency) {
         lastTime = time;
@@ -117,6 +150,9 @@ int writeDatalink(long frequency){
         statusData->throttleSetpoint = getPWM(2);
         statusData->steeringOutput = sData;
         statusData->throttleOutput = tData;
+        statusData->debugChar = debugChar;
+        statusData->debugInt = debugInt;
+        statusData->debugFloat = debugFloat;
 
 
         if (BLOCKING_MODE) {
