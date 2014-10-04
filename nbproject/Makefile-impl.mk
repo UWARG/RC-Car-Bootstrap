@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=RC-Car-Bootstrap-Competition
+PROJECTNAME=RC Car v2
 
 # Active Configuration
 DEFAULTCONF=default

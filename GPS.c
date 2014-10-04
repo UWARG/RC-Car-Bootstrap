@@ -14,6 +14,7 @@ extern GPSData GPS;
 long double relativeLatitude = 0;
 long double relativeLongitude = 0;
 char GPSLock = 0;
+static float lastGpsTime = 0.0;
 
 void initGPS(){
     init_SPI1();
@@ -48,14 +49,42 @@ char getSatellites(){
     return GPS.satellites;
 }
 float getUTCTime(){
-    return GPS.time;
+    float localTime = GPS.time;
+    if (lastGpsTime > localTime) {
+        localTime = lastGpsTime;
+    }
+    else {
+        lastGpsTime = localTime;
+    }
+    return localTime;
 }
 char getHour(){
-    return (char)((int)(GPS.time/10000) % 100);
+    float localTime = GPS.time;
+    if (lastGpsTime > localTime) {
+        localTime = lastGpsTime;
+    }
+    else {
+        lastGpsTime = localTime;
+    }
+    return (char)((int)(localTime/10000) % 100);
 }
 char getMin(){
-    return (char)((int)(GPS.time/100) % 100);
+    float localTime = GPS.time;
+    if (lastGpsTime > localTime) {
+        localTime = lastGpsTime;
+    }
+    else {
+        lastGpsTime = localTime;
+    }
+    return (char)((int)(localTime/100) % 100);
 }
 char getSec(){
-    return (char)((int)GPS.time % 100);
+    float localTime = GPS.time;
+    if (lastGpsTime > localTime) {
+        localTime = lastGpsTime;
+    }
+    else {
+        lastGpsTime = localTime;
+    }
+    return (char)((long)localTime % 100);
 }
