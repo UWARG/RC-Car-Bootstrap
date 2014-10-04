@@ -5,8 +5,6 @@
  * Created on August 21, 2014, 11:32 PM
  */
 
-//Master change test
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -45,15 +43,14 @@ void delay(int);
 /*
  * GPS Functions
  */
-#define PI 3.1415926536
 #define TO_RAD (PI/180)
 #define R_EARTH 6371 //KM
 
 float distance(float lat1, float long1, float lat2, float long2)
 {
     float dlat, dlong;
-    dlat = (lat1- lat2) *= TO_RAD;
-    dlong = (long1 - long2) *= TO_RAD;
+    dlat = (lat1- lat2) * TO_RAD;
+    dlong = (long1 - long2) * TO_RAD;
     lat1 *= TO_RAD;
     lat2 *= TO_RAD;
     long1 *= TO_RAD;
@@ -240,13 +237,17 @@ int main(int argc, char** argv) {
                             distTravelled = distance(startPos[0], startPos[1], pos[0], pos[1]);
                             if(distTravelled >= distanceToTravel)
                             {
-                                
+                                Done = true;
                             }
 
                      }
 
                      background();
                 }
+
+            case (phase3):
+                //statement
+                break;
 
         }
 
