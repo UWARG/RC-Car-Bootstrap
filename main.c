@@ -28,6 +28,7 @@ _FWDT(FWDTEN_OFF & WDTPOST_PS2048 & WDTPRE_PR128); //32,128
 /*
  * Prototypes
  */
+float map(float, float, float, float, float);
 float distance(float, float, float, float);
 void driveForward(float, float);
 void driveBackward(float, float);
@@ -39,6 +40,12 @@ unsigned long seconds();
 void updateSeconds();
 void delay(int);
 
+//Maps a number x in input range iStart to iEnd to range oStart to oEnd
+float map(float x, float iStart, float iEnd, float oStart, float oEnd)
+{
+    double slope = 1.0 * (oEnd - oStart) / (iEnd - iStart); //calculate the scaling factor
+    return (oStart + slope * (x - iStart));
+}
 
 /*
  * GPS Functions
@@ -66,10 +73,15 @@ float distance(float lat1, float long1, float lat2, float long2)
     d = R_EARTH * c;
     return d;
 }
-
 /*
 * Move Functions
 */
+
+void correctHeading(float heading)
+{
+    int currentHeading = getHeading(); //find out the current heading
+    int steeringCorrection = (heading - currentHeading) * steeringGain;
+}
 void driveForward(float time, float throttlePercent)
 {
     setThrottle(throttlePercent);
@@ -160,13 +172,19 @@ MoveState moveState = waitingToStart;
 
 Task task = phase1;
 
-int main(int argc, char** argv) {
+int main() {
     initTruck();
     while(true){
         //This is how you move the car. Throttle goes from -100% to 100%. Steering goes from -100 to 100%.
         setThrottle(0);   //Note that the first -20%/20% is a safety buffer region. Anything less than 20% is equivalent to no throttle.
         setSteering(0);
 
+        boolean Done = false;
+        float distanceToTravel = 10; //in meters
+
+        long double pos[2];
+        float startPos[2];
+        float distTravelled;
         switch (task)
         {
             case(phase1):
@@ -194,15 +212,9 @@ int main(int argc, char** argv) {
 
             case(phase2):
                 delay(2); //delay on startup
-                boolean Done = false;
-                float distanceToTravel = 10; //in meters
                 while(!Done)
                 {
                     moveState = waitingToStart;
-                    long double pos[2];
-                    float startPos[2];
-                    float distTravelled;
-
                      switch (moveState)
                      {
                          case(waitingToStart):
@@ -246,9 +258,32 @@ int main(int argc, char** argv) {
                 }
 
             case (phase3):
-                //statement
-                break;
+                delay(2); //delay on startup
+                Done = false;
+                distanceToTravel = 10; //in meters
+                while(!Done)
+                {
+                    moveState = waitingToStart;
+                     switch (moveState)
+                     {
+                         case(waitingToStart):
+                             if (isGPSLocked())
+                             {
+                                moveState = drivingForward;
+                                driveForward(10, 50);
 
+                                getPosition(pos);
+                                startPos[0] = pos[0];
+                                startPos[1] = pos[1];
+                             }
+                             break;
+
+                         case(drivingForward):
+
+                             break;
+                     }
+
+                }
         }
 
         driveStop();
