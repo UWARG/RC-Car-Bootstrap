@@ -52,7 +52,7 @@ float map(float x, float iStart, float iEnd, float oStart, float oEnd)
  */
 #define TO_RAD (PI/180)
 #define R_EARTH 6371 //KM
-
+#define STEERING_GAIN
 float distance(float lat1, float long1, float lat2, float long2)
 {
     float dlat, dlong;
@@ -80,7 +80,15 @@ float distance(float lat1, float long1, float lat2, float long2)
 void correctHeading(float heading)
 {
     int currentHeading = getHeading(); //find out the current heading
-    int steeringCorrection = (heading - currentHeading) * steeringGain;
+    int headingDif = heading - currentHeading;
+    if (abs(headingDif) > 180)  // The max heading difference is 180 since heading is a cirlce
+    {
+        if (headingDif >=0)
+            headingDif -= 360; // Correct heading diff since its shorter to turn the other way
+        else
+            headingDif += 360; // Correct heading diff since its shorter to turn the other way
+    }
+    int steeringCorrection = map(heading - currentHeading, 0, 360, -100, 100) * STEERING_GAIN;
 }
 void driveForward(float time, float throttlePercent)
 {
