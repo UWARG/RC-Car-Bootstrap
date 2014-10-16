@@ -15,6 +15,7 @@
 #include "StartupErrorCodes.h"
 
 int lastCommandSentCode = 0;
+unsigned char lastCommandReceived = 0;
 float time = 0;
 float lastTime = 0;
 char sData = 0;
@@ -41,13 +42,16 @@ static void blockForGpsStabilization() {
     int lastTime = getSec();
 
     while (consecutiveSeconds < 5) {
+        setDebugChar(1);
         int thisTime = getSec();
         int timeDelta = thisTime - lastTime;
         consecutiveSeconds += timeDelta;
         if (lastTime > thisTime || timeDelta > 1 ) {
             consecutiveSeconds = 0;
         }
+        background();
     }
+    setDebugChar(0);
 }
 
 void initTruck(){
@@ -98,14 +102,23 @@ void setThrottle(int percent){
 }
 
 void background(){
-    readDatalink();
-    time = getUTCTime();
-    writeDatalink(DATALINK_SEND_FREQUENCY);
-    outboundBufferMaintenance();
-    inboundBufferMaintenance();
+    while (TRUE) {
+        unsigned char lastCommand = readDatalink();
+        time = getUTCTime();
+        writeDatalink(DATALINK_SEND_FREQUENCY);
+        outboundBufferMaintenance();
+        inboundBufferMaintenance();
+        if ( lastCommand == KILL_SWITCH ) {
+            setThrottle(0);
+            setSteering(0);
+        }
+        else {
+            break;
+        }
+    }
 }
 
-void readDatalink(void){
+unsigned char readDatalink(void){
 
     struct command* cmd = popCommand();
     if ( cmd ) {
@@ -120,12 +133,14 @@ void readDatalink(void){
                 debug((char*) cmd->data);
                 break;
             //TODO: Add commands here
+            case KILL_SWITCH:
             default:
+                lastCommandReceived = cmd->cmd;
                 break;
         }
         destroyCommand( cmd );
     }
-
+    return lastCommandReceived;
 }
 int writeDatalink(float frequency){
 

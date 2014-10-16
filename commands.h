@@ -9,6 +9,7 @@
 #define	COMMANDS_H
 
 #define DEBUG_TEST 0
+#define KILL_SWITCH 47
 
 
 //Multipart Commands

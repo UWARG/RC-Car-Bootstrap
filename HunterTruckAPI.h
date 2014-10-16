@@ -95,10 +95,10 @@ void background();
  *
  * Input: None.
  *
- * Output: None.
+ * Output: unsigned char -> the last command received.
  *
  ****************************************************************************/
-void readDatalink(void);
+unsigned char readDatalink(void);
 
 /*****************************************************************************
  * Function: int writeDatalink(long frequency);
