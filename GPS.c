@@ -60,7 +60,7 @@ float getUTCTime(){
 }
 char getHour(){
     float localTime = GPS.time;
-    if (lastGpsTime > localTime) {
+    if (lastGpsTime > localTime && lastGpsTime - localTime < 1000   ) {
         localTime = lastGpsTime;
     }
     else {
@@ -70,7 +70,7 @@ char getHour(){
 }
 char getMin(){
     float localTime = GPS.time;
-    if (lastGpsTime > localTime) {
+    if (lastGpsTime > localTime && lastGpsTime - localTime < 1000) {
         localTime = lastGpsTime;
     }
     else {
@@ -80,7 +80,7 @@ char getMin(){
 }
 char getSec(){
     float localTime = GPS.time;
-    if (lastGpsTime > localTime) {
+    if (lastGpsTime > localTime && lastGpsTime - localTime < 1000) {
         localTime = lastGpsTime;
     }
     else {
