@@ -4,7 +4,7 @@
 
 #include "main.h"
 
-#define DATALINK_SEND_FREQUENCY 0.2 //Time in seconds
+#define DATALINK_SEND_FREQUENCY 200 // Time in ms  (0.2sec)
 #define BLOCKING_MODE 0
 
 #define OUTBOUND_QUEUE_SIZE 20

@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include "GPS.h"
 #include "main.h"
+#include "clock.h"
 #include "HunterTruckAPI.h"
 #include "debug.h"
 

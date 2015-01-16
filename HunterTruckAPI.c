@@ -9,14 +9,15 @@
 #include "GPS.h"
 #include "UART1.h"
 #include "UART2.h"
+#include "InputCapture.h"
 #include "net.h"
+#include "clock.h"
 #include "commands.h"
 #include "HunterTruckAPI.h"
 #include "StartupErrorCodes.h"
 
 int lastCommandSentCode = 0;
 unsigned char lastCommandReceived = 0;
-float time = 0;
 float lastTime = 0;
 char sData = 0;
 char tData = 0;
@@ -72,11 +73,13 @@ void initTruck(){
     setThrottle(0);
     setSteering(0);
 
+    // Setup the timer
+    initTimer2();
     //Setup Datalink
     initDataLink();
 
     // Wait for gps time to stabilize
-    blockForGpsStabilization();
+//    blockForGpsStabilization();
 }
 
 void setSteering(int percent){
@@ -104,7 +107,6 @@ void setThrottle(int percent){
 void background(){
     while (TRUE) {
         unsigned char lastCommand = readDatalink();
-        time = getUTCTime();
         writeDatalink(DATALINK_SEND_FREQUENCY);
         outboundBufferMaintenance();
         inboundBufferMaintenance();
@@ -144,6 +146,7 @@ unsigned char readDatalink(void){
 }
 int writeDatalink(float frequency){
 
+    long int time = getTime();
     if (time - lastTime > frequency) {
         lastTime = time;
 

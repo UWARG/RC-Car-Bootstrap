@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=UART2.c debug.c UART1.c StartupErrorCodes.c InterchipDMA.c GPS.c SPI1.c net_inbound.c net_common.c net_outbound.c InputCapture.c OutputCompare.c PWM.c StringUtils.c main.c HunterTruckAPI.c
+SOURCEFILES_QUOTED_IF_SPACED=UART2.c debug.c UART1.c StartupErrorCodes.c InterchipDMA.c GPS.c SPI1.c net_inbound.c net_common.c net_outbound.c InputCapture.c OutputCompare.c PWM.c StringUtils.c main.c HunterTruckAPI.c clock.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/UART2.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/UART1.o ${OBJECTDIR}/StartupErrorCodes.o ${OBJECTDIR}/InterchipDMA.o ${OBJECTDIR}/GPS.o ${OBJECTDIR}/SPI1.o ${OBJECTDIR}/net_inbound.o ${OBJECTDIR}/net_common.o ${OBJECTDIR}/net_outbound.o ${OBJECTDIR}/InputCapture.o ${OBJECTDIR}/OutputCompare.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/StringUtils.o ${OBJECTDIR}/main.o ${OBJECTDIR}/HunterTruckAPI.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/UART2.o.d ${OBJECTDIR}/debug.o.d ${OBJECTDIR}/UART1.o.d ${OBJECTDIR}/StartupErrorCodes.o.d ${OBJECTDIR}/InterchipDMA.o.d ${OBJECTDIR}/GPS.o.d ${OBJECTDIR}/SPI1.o.d ${OBJECTDIR}/net_inbound.o.d ${OBJECTDIR}/net_common.o.d ${OBJECTDIR}/net_outbound.o.d ${OBJECTDIR}/InputCapture.o.d ${OBJECTDIR}/OutputCompare.o.d ${OBJECTDIR}/PWM.o.d ${OBJECTDIR}/StringUtils.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/HunterTruckAPI.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/UART2.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/UART1.o ${OBJECTDIR}/StartupErrorCodes.o ${OBJECTDIR}/InterchipDMA.o ${OBJECTDIR}/GPS.o ${OBJECTDIR}/SPI1.o ${OBJECTDIR}/net_inbound.o ${OBJECTDIR}/net_common.o ${OBJECTDIR}/net_outbound.o ${OBJECTDIR}/InputCapture.o ${OBJECTDIR}/OutputCompare.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/StringUtils.o ${OBJECTDIR}/main.o ${OBJECTDIR}/HunterTruckAPI.o ${OBJECTDIR}/clock.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/UART2.o.d ${OBJECTDIR}/debug.o.d ${OBJECTDIR}/UART1.o.d ${OBJECTDIR}/StartupErrorCodes.o.d ${OBJECTDIR}/InterchipDMA.o.d ${OBJECTDIR}/GPS.o.d ${OBJECTDIR}/SPI1.o.d ${OBJECTDIR}/net_inbound.o.d ${OBJECTDIR}/net_common.o.d ${OBJECTDIR}/net_outbound.o.d ${OBJECTDIR}/InputCapture.o.d ${OBJECTDIR}/OutputCompare.o.d ${OBJECTDIR}/PWM.o.d ${OBJECTDIR}/StringUtils.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/HunterTruckAPI.o.d ${OBJECTDIR}/clock.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/UART2.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/UART1.o ${OBJECTDIR}/StartupErrorCodes.o ${OBJECTDIR}/InterchipDMA.o ${OBJECTDIR}/GPS.o ${OBJECTDIR}/SPI1.o ${OBJECTDIR}/net_inbound.o ${OBJECTDIR}/net_common.o ${OBJECTDIR}/net_outbound.o ${OBJECTDIR}/InputCapture.o ${OBJECTDIR}/OutputCompare.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/StringUtils.o ${OBJECTDIR}/main.o ${OBJECTDIR}/HunterTruckAPI.o
+OBJECTFILES=${OBJECTDIR}/UART2.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/UART1.o ${OBJECTDIR}/StartupErrorCodes.o ${OBJECTDIR}/InterchipDMA.o ${OBJECTDIR}/GPS.o ${OBJECTDIR}/SPI1.o ${OBJECTDIR}/net_inbound.o ${OBJECTDIR}/net_common.o ${OBJECTDIR}/net_outbound.o ${OBJECTDIR}/InputCapture.o ${OBJECTDIR}/OutputCompare.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/StringUtils.o ${OBJECTDIR}/main.o ${OBJECTDIR}/HunterTruckAPI.o ${OBJECTDIR}/clock.o
 
 # Source Files
-SOURCEFILES=UART2.c debug.c UART1.c StartupErrorCodes.c InterchipDMA.c GPS.c SPI1.c net_inbound.c net_common.c net_outbound.c InputCapture.c OutputCompare.c PWM.c StringUtils.c main.c HunterTruckAPI.c
+SOURCEFILES=UART2.c debug.c UART1.c StartupErrorCodes.c InterchipDMA.c GPS.c SPI1.c net_inbound.c net_common.c net_outbound.c InputCapture.c OutputCompare.c PWM.c StringUtils.c main.c HunterTruckAPI.c clock.c
 
 
 CFLAGS=
@@ -191,6 +191,13 @@ ${OBJECTDIR}/HunterTruckAPI.o: HunterTruckAPI.c  nbproject/Makefile-${CND_CONF}.
 	${MP_CC} $(MP_EXTRA_CC_PRE)  HunterTruckAPI.c  -o ${OBJECTDIR}/HunterTruckAPI.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/HunterTruckAPI.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -mlarge-data -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/HunterTruckAPI.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/clock.o: clock.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/clock.o.d 
+	@${RM} ${OBJECTDIR}/clock.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  clock.c  -o ${OBJECTDIR}/clock.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/clock.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1    -omf=elf -mlarge-data -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/clock.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/UART2.o: UART2.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
@@ -303,6 +310,13 @@ ${OBJECTDIR}/HunterTruckAPI.o: HunterTruckAPI.c  nbproject/Makefile-${CND_CONF}.
 	@${RM} ${OBJECTDIR}/HunterTruckAPI.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  HunterTruckAPI.c  -o ${OBJECTDIR}/HunterTruckAPI.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/HunterTruckAPI.o.d"        -g -omf=elf -mlarge-data -O0 -msmart-io=1 -Wall -msfr-warn=off
 	@${FIXDEPS} "${OBJECTDIR}/HunterTruckAPI.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/clock.o: clock.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} ${OBJECTDIR} 
+	@${RM} ${OBJECTDIR}/clock.o.d 
+	@${RM} ${OBJECTDIR}/clock.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  clock.c  -o ${OBJECTDIR}/clock.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/clock.o.d"        -g -omf=elf -mlarge-data -O0 -msmart-io=1 -Wall -msfr-warn=off
+	@${FIXDEPS} "${OBJECTDIR}/clock.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 
