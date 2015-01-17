@@ -78,6 +78,14 @@ void initTruck(){
     //Setup Datalink
     initDataLink();
 
+    //Initialize the ESC
+    int tempTime = getTime();
+    while (getTime() < (tempTime + 500));
+    setThrottle(100);
+    tempTime = getTime();
+    while (getTime() < (tempTime + 100));
+    setThrottle(0);
+    
     // Wait for gps time to stabilize
 //    blockForGpsStabilization();
 }
