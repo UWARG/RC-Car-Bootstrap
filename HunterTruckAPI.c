@@ -13,10 +13,11 @@
 #include "commands.h"
 #include "HunterTruckAPI.h"
 #include "StartupErrorCodes.h"
+#include "timer.h"
 
 int lastCommandSentCode = 0;
-float time = 0;
-float lastTime = 0;
+float datalinkTime = 0;
+float datalinkLastTime = 0;
 char sData = 0;
 char tData = 0;
 
@@ -29,7 +30,8 @@ void initTruck(){
 
     //Setup GPS
     initGPS();
-
+    initTimer4();
+    
     //Setup Input and Output
     initPWM(0b11,0b11);
     PWMOutputCalibration(1,HUNTER_TRUCK_STEERING_SCALE_FACTOR, HUNTER_TRUCK_STEERING_OFFSET);
@@ -39,7 +41,7 @@ void initTruck(){
     setSteering(0);
 
     //Setup Datalink
-    initDataLink();
+//    initDataLink();
 }
 
 void setSteering(int percent){
@@ -65,11 +67,12 @@ void setThrottle(int percent){
 }
 
 void background(){
-    readDatalink();
-    time = getUTCTime();
-    writeDatalink(DATALINK_SEND_FREQUENCY);
-    outboundBufferMaintenance();
-    inboundBufferMaintenance();
+    asm("CLRWDT");
+//    readDatalink();
+//    time = getUTCTime();
+//    writeDatalink(DATALINK_SEND_FREQUENCY);
+//    outboundBufferMaintenance();
+//    inboundBufferMaintenance();
 }
 
 void readDatalink(void){
@@ -96,8 +99,8 @@ void readDatalink(void){
 }
 int writeDatalink(long frequency){
 
-    if (time - lastTime > frequency) {
-        lastTime = time;
+    if (datalinkTime - datalinkLastTime > frequency) {
+        datalinkLastTime = datalinkTime;
 
         struct telem_block* statusData = getDebugTelemetryBlock();//createTelemetryBlock();
 
@@ -126,8 +129,8 @@ int writeDatalink(long frequency){
             return pushOutboundTelemetryQueue(statusData);
         }
     }
-    else if (time < lastTime){
-        lastTime = time;
+    else if (datalinkTime < datalinkLastTime){
+        datalinkLastTime = datalinkTime;
         return 0;
     }
     return 0;

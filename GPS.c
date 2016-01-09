@@ -10,6 +10,7 @@
 #include "GPS.h"
 
 extern GPSData GPS;
+extern char newGPSDataAvailable;
 
 long double relativeLatitude = 0;
 long double relativeLongitude = 0;
@@ -78,7 +79,11 @@ char getSatellites(){
     return GPS.satellites;
 }
 float getUTCTime(){
-    return GPS.time;
+    if (newGPSDataAvailable){
+        return GPS.time;
+    }
+    else
+        return 0;
 }
 char getHour(){
     return (char)((int)(GPS.time/10000) % 100);
@@ -87,5 +92,5 @@ char getMin(){
     return (char)((int)(GPS.time/100) % 100);
 }
 char getSec(){
-    return (char)((int)GPS.time % 100);
+    return (char)((int)(GPS.time) % 100);
 }

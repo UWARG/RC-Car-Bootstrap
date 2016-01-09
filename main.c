@@ -11,6 +11,7 @@
 #include "main.h"
 #include "HunterTruckAPI.h"
 #include "debug.h"
+#include "timer.h"
 
 #include "OutputCompare.h"
 #include "InterchipDMA.h"
@@ -23,7 +24,7 @@ _FWDT(FWDTEN_OFF & WDTPOST_PS2048 & WDTPRE_PR128); //32,128
  * 
  */
 
-
+extern GPSData GPS;
 
 int main(int argc, char** argv) {
     initTruck();
@@ -33,10 +34,11 @@ int main(int argc, char** argv) {
         setSteering(0);
 
 //        This is an example of how you can print the GPS time to the debugging interface.
-//        char str[16];
-//        sprintf((char *)&str, "GPS: %f", GPS.time);
-//        debug((char *)&str);
-        
+        char str[16];
+        sprintf((char *)&str, "Time: %lu", getTime());
+        debug((char *)&str);
+
+
         background();
     }
     return (EXIT_SUCCESS);

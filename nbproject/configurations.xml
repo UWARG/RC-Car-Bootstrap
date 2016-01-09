@@ -26,6 +26,7 @@
       </logicalFolder>
       <logicalFolder name="f3" displayName="Utilities" projectFiles="true">
         <itemPath>StringUtils.h</itemPath>
+        <itemPath>timer.h</itemPath>
       </logicalFolder>
       <itemPath>main.h</itemPath>
       <itemPath>HunterTruckAPI.h</itemPath>
@@ -60,6 +61,7 @@
       </logicalFolder>
       <logicalFolder name="f3" displayName="Utilities" projectFiles="true">
         <itemPath>StringUtils.c</itemPath>
+        <itemPath>timer.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>HunterTruckAPI.c</itemPath>
