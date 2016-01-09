@@ -34,6 +34,7 @@ extern "C" {
 void initGPS();
 
 /*****************************************************************************
+<<<<<<< HEAD
  * Function: getXYCoordinates(long double longitude, long double latitude, float* xyCoordinates);
  *
  * Preconditions: None.
@@ -85,6 +86,8 @@ float getDistance(long double lat1, long double lon1, long double lat2, long dou
 void setRelativeAnchor(long double longitude, long double latitude);
 
 /*****************************************************************************
+=======
+>>>>>>> abb0cf7cda997dddb3dcb17354f80584db0cc025
  * Function: int getLatitude();
  *
  * Preconditions: GPS should be initialized for valid data.
@@ -171,6 +174,7 @@ int getAltitude();
 void getPosition(long double* position);
 
 /*****************************************************************************
+<<<<<<< HEAD
  * Function: void getXYPosition(float* position);
  *
  * Preconditions: GPS should be initialized for valid data. A relative longitude
@@ -188,6 +192,8 @@ void getPosition(long double* position);
 void getXYPosition(float* position);
 
 /*****************************************************************************
+=======
+>>>>>>> abb0cf7cda997dddb3dcb17354f80584db0cc025
  * Function: char isGPSLocked();
  *
  * Preconditions: GPS should be initialized for valid data.

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 build/
 dist/
 *.d
@@ -28,4 +29,36 @@ private/
 *.app
 *.i*86
 *.x86_64
+=======
+build/
+dist/
+*.d
+private/
+*.properties
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+>>>>>>> abb0cf7cda997dddb3dcb17354f80584db0cc025
 *.hex

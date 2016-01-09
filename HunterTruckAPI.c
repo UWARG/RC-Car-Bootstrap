@@ -31,7 +31,7 @@ void initTruck(){
     //Setup GPS
     initGPS();
     initTimer4();
-    
+
     //Setup Input and Output
     initPWM(0b11,0b11);
     PWMOutputCalibration(1,HUNTER_TRUCK_STEERING_SCALE_FACTOR, HUNTER_TRUCK_STEERING_OFFSET);

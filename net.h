@@ -49,7 +49,6 @@ struct telem_block {
     char throttleSetpoint;
     char steeringOutput;
     char throttleOutput;
-
     // TODO: Add additional telemetry to be sent here
 };
 

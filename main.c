@@ -12,7 +12,6 @@
 #include "HunterTruckAPI.h"
 #include "debug.h"
 #include "timer.h"
-
 #include "OutputCompare.h"
 #include "InterchipDMA.h"
 #include "PWM.h"
@@ -37,7 +36,6 @@ int main(int argc, char** argv) {
         char str[16];
         sprintf((char *)&str, "Time: %lu", getTime());
         debug((char *)&str);
-
 
         background();
     }
